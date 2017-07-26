@@ -1,0 +1,32 @@
+#menu {   
+    list-style-type:none;
+    margin:0;
+    padding:0;
+     height:30px;
+    background-color:#600;
+    font-family:Arial;
+    font-size:0.9em;
+    padding-top: 25px;
+    padding-right: 15px;
+}
+#menu li {
+    float:right;
+}
+
+
+}
+#menu li {
+    float:right;
+    height:30px;
+    line-height:30px;
+}
+#menu li a {
+    display:block;
+    padding:0 20px;
+    color:white;
+    text-decoration:none;
+}
+#menu li a:hover {
+    background-color:#900;
+    text-decoration:none;
+}

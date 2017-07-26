@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='data-entry.css') }}">
+    <title>Enter new data</title>
+  </head>
+  <body>
+    {% extends "base.html" %}
+      {% block content %}
+      <br>
+        <p>Add a new entry in database</p>
+        <div class="dataform">
+          <form class="Form-entries" action="{{url_for('NewData')}}" method="POST">
+            Select the title of the data u want to enter:
+            <select class="title-option" name="Title">
+              <option value="Others">Others</option>
+              <option value="Hospital">Hospital</option>
+              <option value="Dictionary">Dictionary</option>
+              <option value="Study">Study</option>
+              <option value="Transport">Transport</option>
+              <option value="Helplines">Helplines</option>
+              <option value="Social">Social</option>
+              <option value="Hotel">Hotel</option>
+              <option value="Shopping">Shopping</option>
+            </select>
+            <br><br>
+            <label>Enter the name: </label>
+            <input type="text" name="Name" required>
+            <br><br>
+            <label>Enter the description: </label>
+            <br>
+            <textarea name="Description" rows="5" cols="60"></textarea>
+            <br><br>
+            <label>Enter the website: </label>
+            <input type="text" name="Website">
+            <br><br>
+            <label>Enter the Contact number: </label>
+            <input type="text" pattern="[0-9]{3,10}" name="phone_number" required>
+            <br><br>
+            <label>Enter the Address: </label>
+            <input type="text" name="Address">
+            <br><br>
+            <input type="submit" name="SUBMIT" value="SUBMIT">
+          </form>
+        </div>
+      {% endblock %}
+  </body>
+</html>

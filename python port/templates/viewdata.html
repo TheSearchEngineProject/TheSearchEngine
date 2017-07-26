@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{url_for('static',filename='viewdata.css')}}">
+    <title>View data</title>
+  </head>
+  <body>
+    {% extends 'base.html' %}
+      {% block content %}
+        <div class="table-div">
+          <table>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Phone Number</th>
+            <th>Website</th>
+            <th>Address</th>
+            <th>options</th>
+            {% for data in wholedata %}
+              <tr>
+                <td class="id-td">{{data.id}}</td>
+                <td class="td1">{{data.Title}}</td>
+                <td class="td1">{{data.name}}</td>
+                <td class="td1">{{data.description}}</td>
+                <td class="td1">{{data.phoneno}}</td>
+                <td class="td1">{{data.website}}</td>
+                <td class="td1">{{data.address}}</td>
+                <td class="options-td">
+                  <br>
+                  <a href="{{url_for('EditData', data_id = data.id)}}">
+                    <button class="options-button" type="button" name="button">Edit</button>
+                  </a>
+                  <br><br>
+                  <a href="{{url_for('DeleteData', data_id = data.id)}}">
+                    <button class="options-button" type="button" name="button">Delete</button>
+                  </a>
+                  <br><br>
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
+        </div>
+      {% endblock %}
+  </body>
+</html>

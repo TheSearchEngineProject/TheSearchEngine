@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='base.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <title>Admin</title>
+  </head>
+  <body>
+    <div class="Block">
+      <div class="panel-heading logo">
+        BINGO
+      </div>
+      <div class="container">
+        <div class="heading">
+          ADMIN PAGE
+        </div><br>
+        {% block content %}
+
+        {% endblock %}
+      </div>
+    </div>
+  </body>
+</html>
