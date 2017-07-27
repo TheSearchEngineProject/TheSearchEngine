@@ -11,6 +11,7 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+
 @Search_engine.route('/')
 def SearchBox():
     return redirect(url_for('AdminPage'))

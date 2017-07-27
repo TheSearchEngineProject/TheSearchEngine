@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for, redirect, render_template, session
+from flask import Flask, request, url_for, redirect, render_template, session, flash
 from sqlalchemy import create_engine, asc, exc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Admin, Data, UserAccounts
@@ -79,7 +79,7 @@ def signupUsers():
                                    mail=request.form['inputEmail'])
             Session.add(newUser)
             Session.commit()
-            return redirect(url_for('AdminPage'))
+            return redirect(url_for('loginPage'))
     return render_template('signupPage.html')
 if __name__ == '__main__':
     Search_engine.debug = True
