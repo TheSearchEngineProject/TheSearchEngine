@@ -2,7 +2,7 @@ from flask import Flask, request, url_for, redirect, render_template, session, f
 from sqlalchemy import create_engine, asc, exc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Admin, Data, UserAccounts
-
+import os
 Search_engine = Flask(__name__)
 
 engine = create_engine('sqlite:///Database.db')
@@ -14,12 +14,34 @@ Session = DBSession()
 @Search_engine.route('/login', methods=['GET', 'POST'])
 def loginPage():
     error = None
-    if request.method == 'POST':
-        if request.form['username'] != 'admin' and request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
+    if session.get('username') == None:
+        if request.method == 'POST':
+            username=request.form['username']
+            password=request.form['password']
+            users = Session.query(UserAccounts).all()
+            for i in users:
+                if username == i.username and password == i.password:
+                    session['username'] = i.username
+                    session['acc_type'] = i.acc_type
+                    return redirect(url_for('AdminPage'))
+                else:
+                    session['username'] = None
+                    session['acc_type'] = None
+            return redirect(url_for('loginPage'))
         else:
-            return redirect(url_for('AdminPage'))
+            return render_template('loginPage.html')
+
     return render_template('loginPage.html', error=error)
+
+@Search_engine.route('/adminLogin', methods=['GET', 'POST'])
+def adminLogin():
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' and request.form['password'] != 'passkey':
+            return redirect(url_for('adminLogin'))
+        else:
+            return render_template('Admin_Page.html')
+    return render_template('adminLoginPage.html', error=error)
 @Search_engine.route('/')
 def SearchBox():
     return redirect(url_for('loginPage'))
@@ -82,5 +104,6 @@ def signupUsers():
             return redirect(url_for('loginPage'))
     return render_template('signupPage.html')
 if __name__ == '__main__':
+    Search_engine.secret_key = os.urandom(50)
     Search_engine.debug = True
     Search_engine.run(host='0.0.0.0', port = 5000)
