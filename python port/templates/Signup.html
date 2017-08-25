@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='login.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="panel-heading logo">
+        BINGO
+      </div>
+      <div class="container">
+        <form action="{{url_for('SignupPage')}}" method="post">
+          <p class="signup-title">Signup Form</p>
+          <div class="input-box">
+            {% if error %}
+              <p class="error">{{ error }}</p>
+            {% endif %}
+            <label>Enter your name</label>
+            <br>
+            <input type="text" name="Name" placeholder="Enter Name here" required>
+            <br><br>
+            <label>Email</label>
+            <br>
+            <input type="Email" name="Email" placeholder="Enter E-mail here" required>
+            <br><br>
+            <label>Password</label>
+            <br>
+            <input type="password" name="Password" placeholder="Enter your Password here" required>
+            <br><br>
+            <label>Re-type Password</label>
+            <br>
+            <input type="password" name="REPassword" placeholder="Re-type your Password here" required>
+            <br><br>
+            <label>Key</label>
+            <br>
+            <input type="password" name="Key" placeholder="Enter your Admin key here" required>
+            <br><br>
+            <input type="submit" name="submit" value="Login">
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

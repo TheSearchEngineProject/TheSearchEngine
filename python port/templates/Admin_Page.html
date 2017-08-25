@@ -1,14 +1,19 @@
 {% extends "base.html" %}
   {% block content %}
   <div class="categories">
-    <div class="col-md-3 col-xs-6 titles">
-      <a href="{{url_for('NewData')}}" class="title-links">
+    <div class="col-md-3 col-xs-6">
+      <a href="{{url_for('NewData')}}">
         <button class="title-button" type="button" name="button">Enter New Data</button>
       </a>
     </div>
-    <div class="col-md-3 col-xs-6 titles">
-      <a href="{{url_for('Viewdata')}}" class="title-links">
+    <div class="col-md-3 col-xs-6">
+      <a href="{{url_for('Viewdata')}}">
         <button class="title-button" type="button" name="button">View the Data</button>
+      </a>
+    </div>
+    <div class="col-md-3 col-xs-6">
+      <a href="{{url_for('ViewAdmins')}}">
+        <button class="title-button" type="button" name="button">View the Admins</button>
       </a>
     </div>
   </div>

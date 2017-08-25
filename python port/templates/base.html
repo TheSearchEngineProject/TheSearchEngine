@@ -12,9 +12,20 @@
         BINGO
       </div>
       <div class="container">
-        <div class="heading">
-          ADMIN PAGE
-        </div><br>
+        <div class="title-css">
+          <div class="heading">
+            ADMIN PAGE
+          </div>
+          <div class="login-options">
+            {% if not session.logged_in %}
+              <a href="{{ url_for('LoginPage') }}">
+                <button type="button" name="button" class="login-opt">LOG IN</button></a>
+            {% else %}
+              <a href="{{ url_for('Logout') }}"><button type="button" name="button" class="login-opt">LOG OUT</button></a>
+            {% endif %}
+          </div>
+        </div>
+        <br>
         {% block content %}
 
         {% endblock %}
