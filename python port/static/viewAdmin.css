@@ -1,0 +1,36 @@
+td {
+  border-collapse: collapse;
+  border-style: solid;
+  border-width: thin;
+  text-align: center;
+  font-size: 100%;
+}
+.table-div {
+  width: 100%;
+  margin:3%;
+}
+.id-td {
+  width: 3%;
+  padding: 1% 1% 1% 1%;
+}
+.options-td {
+  width: 10%;
+}
+.options-button {
+	background-color:#dad7d6;
+	border:0px solid skyblue;
+	display:inline-block;
+	cursor:pointer;
+	color:grey;
+	font-family:Arial;
+	font-size:100%;
+	font-weight:bold;
+  padding-top: 1%;
+  padding-bottom: 1%;
+	text-decoration:none;
+  width: 70%;
+}
+.options-button:hover {
+  text-decoration: underline;
+	background-color:#c5c5c5;
+}

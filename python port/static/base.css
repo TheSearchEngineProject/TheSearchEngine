@@ -2,6 +2,12 @@
   margin: 0px;
   padding: 0px;
 }
+.heading {
+  width: 70%;
+  font-size: 320%;
+  padding-top: 3%;
+  padding-left: 1%;
+}
 .logo {
   padding-left: 2vw;
   font-size: 470%;
@@ -11,10 +17,25 @@
   border-bottom: solid;
   border-color: #d4d4d4;
 }
-.heading {
-  font-size: 320%;
-  padding-top: 3%;
-  padding-left: 1%;
+.login-options{
+  width:30%;
+  padding-top: 4%;
+  font-size: 100%;
+}
+.login-opt{
+  color: grey;
+  background-color:#dad7d6;
+	cursor:pointer;
+  text-decoration: none;
+  padding-top: 1%;
+  padding-bottom: 1%;
+	border-radius:0;
+	font-weight:bold;
+	border:0px solid skyblue;
+}
+.title-css{
+  display: flex;
+  flex-wrap: wrap;
 }
 .title-button {
 	background-color:#dad7d6;

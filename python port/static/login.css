@@ -1,0 +1,28 @@
+.logo {
+  padding-left: 2vw;
+  font-size: 470%;
+  font-weight: bold;
+  letter-spacing: 1vw;
+  background-color: #f1eeee;
+  border-bottom: solid;
+  border-color: #d4d4d4;
+}
+.container{
+  margin-top: 2%;
+}
+.signup-title{
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 160%;
+}
+.input-box{
+  font-size: 120%;
+  display:inline-block;
+  border-width: thin;
+  border-style: solid;
+  padding: 1% 2% 1% 2%;
+}
+.error{
+  color: #ea7373;
+  font-weight: bold;
+}
