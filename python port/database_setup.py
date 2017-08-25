@@ -5,15 +5,6 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
-
-class UserAccounts(Base):
-    __tablename__ = 'user_accounts'
-
-    username = Column(String(80), primary_key=True)
-    password = Column(String(80), nullable=False)
-    mail = Column(String(90), nullable=False)
-    acc_type = Column(String(10), default="default")
-
 class Admin(Base):
     __tablename__ = 'user'
 
@@ -21,6 +12,7 @@ class Admin(Base):
     name = Column(String(150), nullable=False)
     email = Column(String(150), nullable=False)
     password = Column(String(150), nullable=False)
+    power = Column(String(150), server_default="User", nullable=False)
 
 class Data(Base):
     __tablename__ = 'Data'
