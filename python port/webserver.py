@@ -5,8 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Admin, Data
 import random
 import string
-import hashlib
-
+from bcrypt import hashpw, gensalt
 Search_engine = Flask(__name__)
 
 engine = create_engine('sqlite:///Database.db')
@@ -18,20 +17,13 @@ session = DBSession()
 # some functions to make password
 
 # function to make salt used in password hashing
-def make_salt():
-    return ''.join(random.choice(string.letters) for x in xrange(5))
 
-# function to make hash password
-def make_pw_hash(name, pw, salt = None):
-    if not salt:
-        salt = make_salt()
-    h = hashlib.sha256(name + pw + salt).hexdigest()
-    return '%s,%s' % (h, salt)
+def make_pw_hash(pw):
+    h = hashpw(pw.encode('utf8'), gensalt())
+    return '%s' % (h)
 
-# function to check if entered password is write or not
-def valid_pw(name, pw, h):
-    salt = h.split(',')[1]
-    return h == make_pw_hash(name, pw, salt)
+def valid_pw(pw, h):
+    return h == hashpw(pw.encode('utf8'), h)
 
 # Redirect to Main page
 @Search_engine.route('/')
@@ -61,7 +53,7 @@ def SignupPage():
 
             if paswd == repaswd:
                 key = request.form['Key']
-                hashed = make_pw_hash(email, paswd)
+                hashed = make_pw_hash(paswd)
                 if key == "adminbanado":
                     newAdmin = Admin(name = request.form['Name'], email = email,
                                     password = hashed, power = "Admin")
@@ -90,7 +82,7 @@ def LoginPage():
             password = request.form['Password']
             users = session.query(Admin).all()
             for i in users:
-                if email == i.email and valid_pw(email, password, i.password):
+                if email == i.email and valid_pw(i.password):
                     term['logged_in'] = True
                     return redirect(url_for('AdminPage'))
                 else:

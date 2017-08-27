@@ -5,10 +5,13 @@ from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Admin, Data
 import random
 import string
+<<<<<<< HEAD
+=======
 #import hashlib
 
 import bcrypt
 
+>>>>>>> origin/master
 from bcrypt import hashpw, gensalt
 Search_engine = Flask(__name__)
 
@@ -17,6 +20,7 @@ Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
+<<<<<<< HEAD
 
 # some functions to make password
 
@@ -37,6 +41,28 @@ def SearchBox():
     else:
         return redirect(url_for('AdminPage'))
 
+=======
+
+# some functions to make password
+
+# function to make salt used in password hashing
+
+def make_pw_hash(pw):
+    h = hashpw(pw.encode('utf8'), gensalt())
+    return '%s' % (h)
+
+def valid_pw(pw, h):
+    return h == hashpw(pw.encode('utf8'), h)
+
+# Redirect to Main page
+@Search_engine.route('/')
+def SearchBox():
+    if not term.get('logged_in'):
+        return redirect(url_for('LoginPage'))
+    else:
+        return redirect(url_for('AdminPage'))
+
+>>>>>>> origin/master
 # Signup functionality and page
 @Search_engine.route('/signup', methods=['GET','POST'])
 def SignupPage():
@@ -94,6 +120,7 @@ def LoginPage():
                     return render_template('login.html', error = error)
         else:
             return render_template('login.html', error = error)
+<<<<<<< HEAD
 
 # Logout functionality
 @Search_engine.route('/logout')
@@ -101,6 +128,15 @@ def Logout():
     term.pop('logged_in', None)
     return redirect(url_for('LoginPage'))
 
+=======
+
+# Logout functionality
+@Search_engine.route('/logout')
+def Logout():
+    term.pop('logged_in', None)
+    return redirect(url_for('LoginPage'))
+
+>>>>>>> origin/master
 # Admin page
 @Search_engine.route('/admin')
 def AdminPage():
@@ -108,6 +144,7 @@ def AdminPage():
         return render_template('Admin_Page.html')
     else:
         return redirect(url_for('LoginPage'))
+<<<<<<< HEAD
 
 # Function to view all the users
 @Search_engine.route('/admin/viewAdmins')
@@ -118,6 +155,18 @@ def ViewAdmins():
     else:
         return redirect(url_for('LoginPage'))
 
+=======
+
+# Function to view all the users
+@Search_engine.route('/admin/viewAdmins')
+def ViewAdmins():
+    if term.get('logged_in'):
+        wholedata = session.query(Admin).order_by(asc(Admin.id))
+        return render_template('viewAdmin.html', wholedata = wholedata)
+    else:
+        return redirect(url_for('LoginPage'))
+
+>>>>>>> origin/master
 # Function to view all the data of database
 @Search_engine.route('/admin/viewdata')
 def Viewdata():
