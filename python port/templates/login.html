@@ -26,8 +26,13 @@
             <br>
             <input type="password" name="Password" placeholder="Enter your Password here" required>
             <br><br>
-            <input type="submit" name="submit" value="Login">
+            <input type="submit" name="submit" value="Login" class="link-button">
           </div>
+          <br><br>
+          <span>New here?</span><br>
+          <a href="{{url_for('SignupPage')}}">
+            <button type="button" name="button" class="link-button">Signup Here!</button>
+          </a>
         </form>
       </div>
     </div>

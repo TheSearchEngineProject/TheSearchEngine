@@ -20,6 +20,9 @@
             {% if not session.logged_in %}
               <a href="{{ url_for('LoginPage') }}">
                 <button type="button" name="button" class="login-opt">LOG IN</button></a>
+                |
+              <a href="{{ url_for('SignupPage') }}">
+                <button type="button" name="button" class="login-opt">Signup</button></a>
             {% else %}
               <a href="{{ url_for('Logout') }}"><button type="button" name="button" class="login-opt">LOG OUT</button></a>
             {% endif %}

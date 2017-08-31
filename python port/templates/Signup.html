@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='login.css') }}">
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.min.css') }}">
-    <title>Login</title>
+    <title>Signup Page</title>
   </head>
   <body>
     <div class="container-fluid">
@@ -38,8 +38,14 @@
             <br>
             <input type="password" name="Key" placeholder="Enter your Admin key here" required>
             <br><br>
-            <input type="submit" name="submit" value="Login">
+            <input type="submit" name="submit" value="Signup" class="link-button">
           </div>
+          <br><br>
+          <span>Already a member?</span><br>
+          <a href="{{url_for('LoginPage')}}">
+            <button type="button" name="button" class="link-button">Login Here!</button>
+          </a>
+          <br><br><br>
         </form>
       </div>
     </div>
