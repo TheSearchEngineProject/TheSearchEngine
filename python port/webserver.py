@@ -5,7 +5,8 @@ from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Admin, Data
 import random
 import string
-from bcrypt import hashpw, gensalt
+import hashlib
+
 Search_engine = Flask(__name__)
 
 engine = create_engine('sqlite:///Database.db')
@@ -16,14 +17,21 @@ session = DBSession()
 
 # some functions to make password
 
-# function to make salt used in password hashing
+ # function to make salt used in password hashing
+def make_salt():
+    return ''.join(random.choice(string.letters) for x in xrange(5))
 
-def make_pw_hash(pw):
-    h = hashpw(pw.encode('utf8'), gensalt())
-    return '%s' % (h)
+ # function to make hash password
+def make_pw_hash(name, pw, salt = None):
+    if not salt:
+        salt = make_salt()
+    h = hashlib.sha256(name + pw + salt).hexdigest()
+    return '%s,%s' % (h, salt)
 
-def valid_pw(pw, h):
-    return h == hashpw(pw.encode('utf8'), h)
+ # function to check if entered password is write or not
+def valid_pw(name, pw, h):
+    salt = h.split(',')[1]
+    return h == make_pw_hash(name, pw, salt)
 
 # Redirect to Main page
 @Search_engine.route('/')
@@ -53,7 +61,7 @@ def SignupPage():
 
             if paswd == repaswd:
                 key = request.form['Key']
-                hashed = make_pw_hash(paswd)
+                hashed = make_pw_hash(email, paswd)
                 if key == "adminbanado":
                     newAdmin = Admin(name = request.form['Name'], email = email,
                                     password = hashed, power = "Admin")
@@ -82,7 +90,7 @@ def LoginPage():
             password = request.form['Password']
             users = session.query(Admin).all()
             for i in users:
-                if email == i.email and valid_pw(i.password):
+                if email == i.email and valid_pw(email, password, i.password):
                     term['logged_in'] = True
                     return redirect(url_for('AdminPage'))
                 else:
@@ -115,13 +123,10 @@ def ViewAdmins():
         return redirect(url_for('LoginPage'))
 
 # Function to view all the data of database
-@Search_engine.route('/admin/viewdata')
+@Search_engine.route('/viewdata')
 def Viewdata():
-    if term.get('logged_in'):
-        wholedata = session.query(Data).order_by(asc(Data.Title))
-        return render_template('viewdata.html', wholedata = wholedata)
-    else:
-        return redirect(url_for('LoginPage'))
+    wholedata = session.query(Data).order_by(asc(Data.Title))
+    return render_template('viewdata.html', wholedata = wholedata)
 
 # Function to add new data to database
 @Search_engine.route('/admin/Newdata', methods=['GET','POST'])
