@@ -26,3 +26,31 @@
   color: #ea7373;
   font-weight: bold;
 }
+
+.simple {
+  text-decoration: none;
+  color: black;
+  font-size: 110%;
+}
+.simple:hover {
+  text-decoration: none;
+}
+
+.link-button {
+	background-color:#dad7d6;
+	border:0px solid skyblue;
+	display:inline-block;
+	cursor:pointer;
+	color:grey;
+	font-family:Arial;
+	font-size:100%;
+	font-weight:bold;
+  padding-top: 1%;
+  padding-bottom: 1%;
+	text-decoration:none;
+  width: auto;
+}
+.link-button:hover {
+  text-decoration: underline;
+	background-color:#c5c5c5;
+}
