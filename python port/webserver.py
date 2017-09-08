@@ -93,9 +93,9 @@ def LoginPage():
                 if email == i.email and valid_pw(email, password, i.password):
                     term['logged_in'] = True
                     return redirect(url_for('AdminPage'))
-                else:
-                    error = "Invalid Email or Password"
-                    return render_template('login.html', error = error)
+            if not term.get('logged_in'):
+                error = "Invalid Email or Password"
+                return render_template('login.html', error = error)
         else:
             return render_template('login.html', error = error)
 
